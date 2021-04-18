@@ -1,75 +1,120 @@
-## Deploying This Project
+## PART 1: SETUP AND INTRODUCTION
 
-[Clich Here to See Live Demo](https://peppa.pythonanywhere.com/)
+1- Install Vscode and python for Windows
+https://www.python.org/downloads/windows/
+https://code.visualstudio.com/download#
 
--> Make Sure you have Git Installed
-Git Download
-https://git-scm.com/download/win
 
--> Create a GitHub Account at
-https://github.com/
+2- Overview of Django
+Models-Viewa-Templates
 
--> Get Your Project files or grap mine here
-https://github.com/itzomen/porto
 
--> Create repository and Push the code to GitHub
+3- Test python
+`py -3 --version`
 
--> Test django webapp and create django requirements files
-``` bash
-python manage.py runserver
-python -m pip freeze > requirements.txt
+4- Create Virtual Environment where you install python packages to isolate from
+other packages in your system
+`py -3 -m venv env`
+
+5- Activate Environment
+
+Windows disable running such scripts, fix with
+POWERSHELL as admin
+Set-ExecutionPolicy RemoteSigned
+
+`.\env\Scripts\activate`
+
+6- Install Django
+`python -m pip install django`
+Test Django
+`python -m django --version`
+
+7- Start a new project in the directory
+`django-admin startproject portfolio`
+
+8- Check project
+`python manage.py runserver`
+
+9- Create an app
+`python manage.py startapp john`
+
+10- Add app to settings
+
+11- Install Pillow which is a python Imaging Library
+`python -m pip install Pillow `
+
+
+---------------------------------------------------------------------
+PART 2: MODELS AND ADMIN INTERFACE
+
+https://docs.djangoproject.com/en/3.1/topics/db/models/
+https://docs.djangoproject.com/en/3.1/ref/contrib/admin/
+
+
+12- Create Models, and apply migrations
+python manage.py makemigrations
+python manage.py migrate
+
+13- Create superuser
+`python manage.py createsuperuser`
+
+14- Add string methods
+```python
+def __str__(self):
+        return str(self.id)
 ```
 
--> Update Repository
+15- Configure static files path and urls
+```python
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
--> Create Pythonanywhere account
-https://www.pythonanywhere.com/registration/register/beginner/
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root/')
 
--> Clone repository
-``` bash
-git clone https://github.com/itzomen/porto.git
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 ```
 
--> Create a Virtual environment using
-``` bash
-mkvirtualenv --python=/usr/bin/python3.8 venv
+16- Tell Django where to find the static files while on the browser
+
+```python
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 ```
 
--> Install all requirements using
-``` bash
-pip install -r requirements.txt
+
+---------------------------------------------------------------------
+
+PART 3: VIEWS AND TEMPLATES
+
+
+17- Write basic view, add index.html in app template folder and configure 
+app url
+
+```python
+def index(request):
+    return render(request, 'index.html')
 ```
--> Setting up your Web app and WSGI file
+18- Add assets folder to static_root folder
+- Frontend
+https://github.com/bedimcode/responsive-portfolio-website-JhonDoe
 
+19- Load static files in html file
+
+20- Write Views
+
+21- Add Data in Admin interface
+
+22- Load content from views to Templates
+```html
+{% static 'assets/css/styles.css' %}
+
+{{ model.field }}
 ```
-Source code: /home/peppa/porto
 
-Working directory: /home/peppa/
+---------------------------------------------------------------------
+Check [DEPLOYMENT](Deploy.md)
 
-Virtual Environtment Path: /home/peppa/.virtualenvs/env
-
-# Paths
-/static/	/home/peppa/porto/static_root/
-
-/media/	/home/peppa/porto/media_root/
-
-```
--> WSGI
-```
-import os
-import sys
-
-
-path = os.path.expanduser('~/porto')
-
-if path not in sys.path:
-    sys.path.insert(0, path)
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'portfolio.settings'
-
-from django.core.wsgi import get_wsgi_application
-
-from django.contrib.staticfiles.handlers import StaticFilesHandler
-application = StaticFilesHandler(get_wsgi_application())
-
-```
