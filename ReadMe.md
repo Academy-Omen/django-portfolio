@@ -2,6 +2,9 @@
 
 ## [Watch the Tutorial Now](https://www.youtube.com/watch?v=djNrEft8d_I&list=PLnH40zIDkjbSvyke2aopMo5EVbtbI73mH)
 
+- [Notes and Useful commands](Notes.md)
+- [Simple Deployment Notes](Deploy.md)
+
 # Set up
 Steps:
 -> These steps are explained [here](https://youtu.be/djNrEft8d_I)
