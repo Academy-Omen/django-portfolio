@@ -2,7 +2,7 @@
 
 ## [Watch the Tutorial Now](https://www.youtube.com/watch?v=djNrEft8d_I&list=PLnH40zIDkjbSvyke2aopMo5EVbtbI73mH)
 
-- [Notes and Useful commands](Notes.md)
+- [Notes and Useful commands](notes.md)
 - [Simple Deployment Notes](Deploy.md)
 
 # Set up
